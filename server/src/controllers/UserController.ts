@@ -10,7 +10,7 @@ const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const response = await sp.web.lists.getByTitle("Employees").items.getAll();
 
-    console.log("logging response", response);
+    // console.log("logging response", response);
 
     return res.send(response);
   } catch (error) {
@@ -45,33 +45,22 @@ export { getAllEmployeesById };
 
 const AddEmployees = async (req: Request, res: Response) => {
   try {
-    console.log("starting....");
-
-    console.log(req.body, "req body log"); 
 
     const newUser = {
       name: req.body.name,
-
       email: req.body.email,
-
-      gender: req.body.gender,
-
       designation: req.body.designation,
     };
-
-    console.log("new user log", newUser);
 
     const response = await sp.web.lists.getByTitle("Employees").items.add({
       name: newUser.name,
 
       email: newUser.email,
 
-      
-
       designation: newUser.designation,
     });
 
-    console.log(response.data.Id);
+    // console.log(response.data.Id);
 
     return res.send(response);
   } catch (error) {
@@ -83,19 +72,28 @@ const AddEmployees = async (req: Request, res: Response) => {
 
 export { AddEmployees };
 
+//Delete employee function
 
+const deleteEmployees = async (req: Request, res: Response) => {
+  console.log("delete employee");
 
-//  export const test = async (req: Request, res: Response) => {
-//   // const { id } = req.body;
-//    console.log(req.body)
- 
-//   try {
-    
-//     console.log("trycatch")
-//   } catch (error) {
-//     console.error(error);
+  let Id: number = Number.parseInt(req.params.id);
 
-//     return res.status(500).json({ error: "Something went wrong" });
-//   }
-// };
+  console.log("id", Id);
 
+  try {
+    let user = await sp.web.lists.getByTitle("Employees").items.getById(Id);
+
+    if (!user) {
+      throw new Error("User not found");
+    } else {
+      await sp.web.lists.getByTitle("Employees").items.getById(Id).delete();
+
+      res.send({ message: "Deleted successfully" });
+    }
+  } catch (error) {
+    console.log(error); //  res.status(500).send({ message: `Internal Server Error` });
+  }
+};
+
+export { deleteEmployees };

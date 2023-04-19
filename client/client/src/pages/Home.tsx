@@ -6,6 +6,7 @@ import axios from "axios";
 import Nav from "../components/Nav";
 import Search from "../components/Search";
 import "../styles/Home.css";
+import Spinner from "../components/Spinner";
 
 const Home = (): JSX.Element => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
@@ -24,6 +25,7 @@ const Home = (): JSX.Element => {
 
   return (
     <>
+    {/* <Spinner/> */}
       <Search />
 
       <div className="card-list">

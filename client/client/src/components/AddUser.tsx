@@ -32,14 +32,15 @@ export const AddUser: React.FC<AddUserProps> = () => {
 
     try {
       const response = await axios.post<User>(
-        "http://localhost:5000/addemployee",
+        "http://localhost:5000/get/addemployee",
         employee
+        
       );
-
+      navigate("/");
       console.log("Response: ", response.data);
       
     } catch (error) {
-      navigate("/");
+      
       console.error(error);
     }
   };

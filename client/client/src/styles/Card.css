@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+.image{
+  object-fit: cover;
+}
+
 .card {
   background-color: #f1f1f1;
   border-radius: 10px;
