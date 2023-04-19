@@ -1,0 +1,18 @@
+.nav-bar {
+    margin: 0;
+    overflow: hidden;
+    background-color: #5928e5;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-size-adjust: unset;
+  }
+  
+  .nav-text {
+    
+    color: white;
+    text-decoration: none;
+    padding-top: 20px;
+    padding-left: 85px;
+  }
+  
