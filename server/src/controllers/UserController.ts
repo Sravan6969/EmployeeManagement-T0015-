@@ -10,11 +10,10 @@ const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const response = await sp.web.lists.getByTitle("Employees").items.getAll();
 
-    // console.log("logging response", response);
+    
 
     return res.send(response);
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -40,47 +39,33 @@ const getAllEmployeesById = async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Something went wrong" });
   }
 };
-
 export { getAllEmployeesById };
 
 const AddEmployees = async (req: Request, res: Response) => {
   try {
-
     const newUser = {
       name: req.body.name,
       email: req.body.email,
       designation: req.body.designation,
     };
-
     const response = await sp.web.lists.getByTitle("Employees").items.add({
       name: newUser.name,
-
       email: newUser.email,
-
       designation: newUser.designation,
     });
-
-    // console.log(response.data.Id);
-
     return res.send(response);
   } catch (error) {
     console.log(error);
-
     return res.status(500).json({ error: "Internal server error" });
   }
 };
-
 export { AddEmployees };
-
-//Delete employee function
-
 const deleteEmployees = async (req: Request, res: Response) => {
   console.log("delete employee");
 
   let Id: number = Number.parseInt(req.params.id);
 
   console.log("id", Id);
-
   try {
     let user = await sp.web.lists.getByTitle("Employees").items.getById(Id);
 
@@ -92,8 +77,29 @@ const deleteEmployees = async (req: Request, res: Response) => {
       res.send({ message: "Deleted successfully" });
     }
   } catch (error) {
-    console.log(error); //  res.status(500).send({ message: `Internal Server Error` });
+    console.log(error);
   }
 };
-
 export { deleteEmployees };
+
+export const getSingleEmployee = (async (req: Request, res: Response) => {
+  const { Id } = req.params;
+  console.log(Id)
+
+  const id = Number(Id);
+
+  if (isNaN(id)) {
+    res.status(400).json({
+      success: false,
+      message: 'Invalid ID provided'
+    });
+    return;
+  }
+  const employee = await sp.web.lists.getByTitle('Employees').items.getById(id)();
+
+  res.status(200).json({
+    success: true,
+    message: "Fetched Single Employee",
+    employee,
+  });
+});

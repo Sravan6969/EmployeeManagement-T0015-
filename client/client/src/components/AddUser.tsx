@@ -67,7 +67,7 @@ export const AddUser: React.FC<AddUserProps> = () => {
       <div className="add-user">
         <div className="add-image">
           <div className="image"></div>
-          <h1> {name} </h1>
+          <h1 className="text-id"> {name} </h1>
         </div>
         <div className="add-details">
           <form>

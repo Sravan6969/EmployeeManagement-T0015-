@@ -10,6 +10,7 @@ import Spinner from "../components/Spinner";
 
 const Home = (): JSX.Element => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const Home = (): JSX.Element => {
       try {
         const response = await axios.get("http://localhost:5000/get");
         setEmployees(response.data);
+        setLoading(false);
       } catch (error) {}
     };
 
@@ -25,14 +27,15 @@ const Home = (): JSX.Element => {
 
   return (
     <>
-    {/* <Spinner/> */}
-      <Search />
-
-      <div className="card-list">
-        {employees?.map((employee) => (
-          <Card employee={employee} />
-        ))}
-      </div>
+    {loading ? (
+      <Spinner/>
+    ) : (
+      <><Search /><div className="card-list">
+            {employees?.map((employee) => (
+              <Card employee={employee} />
+            ))}
+          </div></>
+    )}
     </>
   );
 };

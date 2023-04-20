@@ -1,0 +1,79 @@
+.container2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #001E2B;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.left {
+  flex: 1;
+}
+
+.imagecontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+img {
+  clip-path: circle(100px at center);
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.right {
+  flex: 2;
+  margin-left: 20px;
+}
+
+.title,
+.email,
+.designation {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.btn-delete,
+.btn-update {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #0077cc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background-color: #cc0000;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .container2 {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .left {
+    margin-bottom: 20px;
+  }
+
+  .right {
+    margin-left: 0;
+  }
+
+  .btn-delete,
+  .btn-update {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+}
