@@ -5,7 +5,8 @@ import {
   getAllEmployees,
   getAllEmployeesById,
   deleteEmployees,
-  getSingleEmployee
+  getSingleEmployee,
+  updateSingleEmployee
   
 } from "../controllers/UserController";
 
@@ -20,5 +21,7 @@ router.post("/addemployee", AddEmployees);
 router.delete("/deleteEmployees/:id", deleteEmployees);
 
 router.get("/viewdetails/:Id", getSingleEmployee);
+
+router.route("/updateemployee/:id").put(updateSingleEmployee);
 
 export default router;

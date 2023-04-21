@@ -10,11 +10,8 @@ const getAllEmployees = async (req: Request, res: Response) => {
   try {
     const response = await sp.web.lists.getByTitle("Employees").items.getAll();
 
-    
-
     return res.send(response);
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 export { getAllEmployees };
@@ -82,24 +79,61 @@ const deleteEmployees = async (req: Request, res: Response) => {
 };
 export { deleteEmployees };
 
-export const getSingleEmployee = (async (req: Request, res: Response) => {
+export const getSingleEmployee = async (req: Request, res: Response) => {
   const { Id } = req.params;
-  console.log(Id)
+  console.log(Id);
 
   const id = Number(Id);
 
   if (isNaN(id)) {
     res.status(400).json({
       success: false,
-      message: 'Invalid ID provided'
+      message: "Invalid ID provided",
     });
     return;
   }
-  const employee = await sp.web.lists.getByTitle('Employees').items.getById(id)();
+  const employee = await sp.web.lists
+    .getByTitle("Employees")
+    .items.getById(id)();
 
   res.status(200).json({
     success: true,
     message: "Fetched Single Employee",
     employee,
   });
-});
+};
+
+//update single Employee Api
+
+export const updateSingleEmployee = async (req: Request, res: Response) => {
+  const { Id } = req.params;
+  const { name, email, designation} = req.body;
+  console.log(Id);
+
+  const id = Number(Id);
+
+  if (isNaN(id)) {
+    res.status(400).json({
+      success: false,
+      message: "Invalid ID provided",
+    });
+    return;
+  }
+
+  const updateEmployee = {
+    name: name,
+    email: email,
+    designation: designation,
+  };
+
+  const employee = await sp.web.lists
+    .getByTitle("Employees")
+    .items.getById(id)
+    .update(updateEmployee);
+
+  res.status(200).json({
+    success: true,
+    message: " Succesfully Updated  Employee Details",
+    employee,
+  });
+};

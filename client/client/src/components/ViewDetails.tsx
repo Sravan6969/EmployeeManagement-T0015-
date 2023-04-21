@@ -43,7 +43,7 @@ const ViewDetails = () => {
   const handleUpdate = () => {
     navigate(`/update`);
   };
-
+  
   return (
     <div className="container2">
       <div className="left">
