@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddUser.css";
 import axios from "axios";
+import JSConfetti from 'js-confetti'
+const jsConfetti = new JSConfetti()
 
 interface AddUserProps {}
 
@@ -22,13 +24,20 @@ export const AddUser: React.FC<AddUserProps> = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     //working on this function
     e.preventDefault();
+    await jsConfetti.addConfetti({
+      emojis: ["🎉", "📈", "🚀"],
+      
+    })
 
     const employee: User = {
       name: name,
       email: email,
       designation: designation,
+
+      
     };
     console.log("New user: ", employee);
+    
 
     try {
       const response = await axios.post<User>(

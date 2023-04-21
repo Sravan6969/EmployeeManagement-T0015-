@@ -90,7 +90,7 @@ const ViewDetails = () => {
         value={name || ""}
         onChange={(e) => setName(e.target.value)}
         className="name-text"
-        placeholder="Name"
+        placeholder={user?.name}
       />
 
       <input
@@ -99,7 +99,7 @@ const ViewDetails = () => {
         value={email || ""}
         onChange={(e) => setEmail(e.target.value)}
         className="email-text"
-        placeholder="Email"
+        placeholder={user?.email}
       />
 
       <input
@@ -108,7 +108,7 @@ const ViewDetails = () => {
         value={designation || ""}
         onChange={(e) => setDesignation(e.target.value)}
         className="designation-text"
-        placeholder="Designation"
+        placeholder={user?.designation}
       />
 
 <button className="btn-update" onClick={handleUpdate}>
