@@ -4,13 +4,15 @@ import { sp } from "@pnp/sp-commonjs";
 
 import { SPFetchClient } from "@pnp/nodejs-commonjs";
 
+// get all employees details
+
 const getAllEmployees = async (req: Request, res: Response) => {
   console.log("test");
 
   try {
-    const response = await sp.web.lists.getByTitle("Employees").items.getAll();
+    const Response = await sp.web.lists.getByTitle("Employees").items.getAll();
 
-    return res.send(response);
+    return res.send(Response);
   } catch (error) {}
 };
 
@@ -24,12 +26,12 @@ const getAllEmployeesById = async (req: Request, res: Response) => {
   }
 
   try {
-    const response = await sp.web.lists
+    const Response = await sp.web.lists
       .getByTitle("Employees")
       .items.getById(Number(id))
       .get();
 
-    return res.json(response);
+    return res.json(Response);
   } catch (error) {
     console.error(error);
 
@@ -38,6 +40,8 @@ const getAllEmployeesById = async (req: Request, res: Response) => {
 };
 export { getAllEmployeesById };
 
+// Add employees details
+
 const AddEmployees = async (req: Request, res: Response) => {
   try {
     const newUser = {
@@ -45,18 +49,21 @@ const AddEmployees = async (req: Request, res: Response) => {
       email: req.body.email,
       designation: req.body.designation,
     };
-    const response = await sp.web.lists.getByTitle("Employees").items.add({
+    const Response = await sp.web.lists.getByTitle("Employees").items.add({
       name: newUser.name,
       email: newUser.email,
       designation: newUser.designation,
     });
-    return res.send(response);
+    return res.send(Response);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 export { AddEmployees };
+
+// delete employee details
+
 const deleteEmployees = async (req: Request, res: Response) => {
   console.log("delete employee");
 
@@ -77,7 +84,10 @@ const deleteEmployees = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
 export { deleteEmployees };
+
+//get employee view details
 
 export const getSingleEmployee = async (req: Request, res: Response) => {
   const { Id } = req.params;
@@ -107,7 +117,7 @@ export const getSingleEmployee = async (req: Request, res: Response) => {
 
 export const updateSingleEmployee = async (req: Request, res: Response) => {
   const { Id } = req.params;
-  const { name, email, designation} = req.body;
+  const { name, email, designation } = req.body;
   console.log(Id);
 
   const id = Number(Id);
@@ -137,3 +147,17 @@ export const updateSingleEmployee = async (req: Request, res: Response) => {
     employee,
   });
 };
+
+console.log(Response)
+
+// let Id = Response.user.Id
+//     // console.log("logging Response", Response);
+//     const folderId = Response.user.Id;
+//     const newFolderName = `${folderId}`;
+//     const documentLibraryName = `EmployeeLibrary`;
+//     const documentLibrary = sp.web.lists.getByTitle(documentLibraryName);
+//     await documentLibrary.rootFolder.folders
+//       .addUsingPath(newFolderName)
+//       .then(() => {
+//         console.log(`Folder '${newFolderName}' created successfully.`);
+//       });

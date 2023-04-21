@@ -1,31 +1,26 @@
 import { useState, CSSProperties } from "react";
+import { ClimbingBoxLoader, PacmanLoader } from "react-spinners";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const override: CSSProperties = {
   display: "block",
-  margin: "25vh auto",
-  borderColor: "#001E2B",
+  margin: "0 auto",
+  borderColor: "red",
 };
 
-function Spinner() {
+const Spinner = () => {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffffff");
+  let [color, setColor] = useState("");
 
   return (
-    <div className="sweet-loading">
-      {/* <button onClick={() => setLoading(!loading)}>Toggle Loader</button>
-      <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" /> */}
-
-      <ClipLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+    <div className="sweet-loading py-80 flex items-center justify-center bg-slate-400">
+      {/* <ClimbingBoxLoader
+  color="rgba(28, 49, 122, 1)"
+  size={28}
+/> */}
+      <PacmanLoader color="rgba(28, 49, 122, 1)" size={30} />
     </div>
   );
-}
+};
 
 export default Spinner;

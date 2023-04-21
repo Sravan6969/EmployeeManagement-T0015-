@@ -48,7 +48,6 @@ const Card = ({ employee }: Props) => {
         <button className="edit" onClick={handleView}>
           View
         </button>
-        
       </div>
     </div>
   );

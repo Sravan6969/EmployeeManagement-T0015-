@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px white;
   margin: 20px;
   padding: 20px;
   background-color: #001E2B;
   border-radius: 10px;
+  
 }
 
 .text-id{

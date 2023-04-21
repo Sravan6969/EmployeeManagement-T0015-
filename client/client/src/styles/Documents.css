@@ -1,0 +1,35 @@
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .upload-button,
+  .download-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-button:hover,
+  .download-button:hover {
+    background-color: #0062cc;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .buttons-container {
+      flex-direction: column;
+    }
+  
+    .upload-button,
+    .download-button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  

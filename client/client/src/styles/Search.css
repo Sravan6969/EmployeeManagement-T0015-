@@ -19,8 +19,8 @@
     margin-left: 100px;
     margin-right: 40px;
     width: 30%;
-    background-color: #4caf50;
-    color: white;
+    background-color: #00ED64;
+    color: black;
     font-size: 16px;
     border: none;
     padding: 10px;
@@ -30,5 +30,5 @@
   }
   
   .search-bar button.add-button:hover {
-    background-color: #3e8e41;
+    background-color: #02cc56;
   }

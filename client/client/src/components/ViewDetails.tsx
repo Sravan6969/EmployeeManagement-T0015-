@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../styles/ViewDetails.css'
-import { IEmployee } from "../types";
+import "../styles/ViewDetails.css";
+
+// import { IEmployee } from "../types";
 
 interface User {
   id: number;
@@ -16,12 +17,15 @@ const ViewDetails = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [designation, setDesignation] = useState<string>("");
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/get/viewdetails/${id}`)
       .then((response) => {
-        console.log(response?.data?.employee)
+        console.log(response?.data?.employee);
         setUser(response?.data?.employee);
       })
       .catch((error) => {
@@ -33,48 +37,110 @@ const ViewDetails = () => {
     try {
       console.log(id);
       await axios.delete(`http://localhost:5000/get/deleteEmployees/${id}`);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.log("delete clicked");
       console.error("Error deleting employee:", error);
     }
   };
 
-  const handleUpdate = () => {
-    navigate(`/update`);
+  const handleEdit = () => {
+    setIsEditing(true)
+  }
+
+  const handleUpdate = async () => {
+    const updatedEmployee = {
+      name: name,
+      email: email,
+      designation: designation,
+    };
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/get/updateemployee/${id}`,
+        updatedEmployee
+      );
+      console.log(`response ${response}`);
+      // toast.success('Employee details Updated Successfully', { className: 'toastify-success' });
+      navigate('/')
+    } catch (error) {
+      console.error(error);
+    }
   };
-  
+
   return (
+    
+    
     <div className="container2">
-      <div className="left">
-        <div className="imagecontainer">
-          <img
-            src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Customer-testimonial-page.jpg?width=893&height=600&name=Customer-testimonial-page.jpg"
-            alt=""
-            height="250px"
-            width="250px"
-          />
-        </div>
-      </div>
-      <div className="right">
-        <div className="title">
-          Name: <span>{user?.name}</span>
-        </div>
-        <div className="email">
-          Email: <span>{user?.email}</span>
-        </div>
-        <div className="designation">
-          Designation: <span>{user?.designation}</span>
-        </div>
-        <button className="btn-delete" onClick={handleDelete}>
-          Delete
-        </button>
-        <button className="btn-update" onClick={handleUpdate}>
-          Update
-        </button>
-      </div>
+  <div className="left">
+    <div className="imagecontainer">
+      <img
+        src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Customer-testimonial-page.jpg?width=893&height=600&name=Customer-testimonial-page.jpg"
+        alt=""
+        height="250px"
+        width="250px"
+      />
     </div>
-  );
-};
+  </div>
+  {isEditing ? (
+    <div className="flex flex-col space-y-4">
+      <input
+        type="text"
+        id="name"
+        value={name || ""}
+        onChange={(e) => setName(e.target.value)}
+        className="name-text"
+        placeholder="Name"
+      />
+
+      <input
+        type="text"
+        id="emailInput"
+        value={email || ""}
+        onChange={(e) => setEmail(e.target.value)}
+        className="email-text"
+        placeholder="Email"
+      />
+
+      <input
+        type="text"
+        id="emailInput"
+        value={designation || ""}
+        onChange={(e) => setDesignation(e.target.value)}
+        className="designation-text"
+        placeholder="Designation"
+      />
+
+<button className="btn-update" onClick={handleUpdate}>
+     Update
+     </button>
+    </div>
+  ) : (
+    <div className="right">
+      <div className="title">
+        Name: <span>{user?.name}</span>
+      </div>
+      <div className="email">
+        Email: <span>{user?.email}</span>
+      </div>
+      <div className="designation">
+        Designation: <span>{user?.designation}</span>
+      </div>
+      <button className="btn-delete" onClick={handleDelete}>
+        Delete
+      </button>
+    
+    
+ 
+ <button className="btn-update" onClick={handleEdit}>
+ edit
+</button>
+
+    
+
+    </div>
+  )}
+</div>
+  )}
 
 export default ViewDetails;
