@@ -1,6 +1,45 @@
+body{
+    margin-bottom: 90px;
+}
+
 .card-list{
     padding-top: 20px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+
+.search-bar {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-bar input[type="text"] {
+    margin-left: 40px;
+    width: 70%;
+    padding: 10px;
+    border: 3px;
+    font-size: 16px;
+    border-radius: 50px;
+  }
+  
+  .search-bar button.add-button {
+    margin-left: 100px;
+    margin-right: 40px;
+    width: 30%;
+    background-color: #00ED64;
+    color: black;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .search-bar button.add-button:hover {
+    background-color: #02cc56;
+  }

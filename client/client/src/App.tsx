@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import { AddUser } from './components/AddUser';
 import Documents from './components/Documents';
 import ViewDetails from './components/ViewDetails';
+import Footer from './components/Footer';
 
 
 
@@ -19,8 +20,9 @@ function App() {
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/add-doc" element={<Documents />} />
         <Route path="/view-details/:id" element={<ViewDetails/>} />
-  
+        
       </Routes>
+      <Footer/>
     </>
   );
 }

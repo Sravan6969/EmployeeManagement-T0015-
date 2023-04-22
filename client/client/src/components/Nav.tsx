@@ -7,7 +7,7 @@ const Nav: React.FC = () => {
     <div>
       <div className='nav-bar stcky'>
         <Link className='nav-text' to="/" relative="path">
-          HR PORTAL
+          <span className='Icon text'>HR PORTAL</span>
         </Link>
       </div>
     </div>

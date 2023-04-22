@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/ViewDetails.css";
+import { MdModeEditOutline } from 'react-icons/md';
 
 // import { IEmployee } from "../types";
 
@@ -133,7 +134,8 @@ const ViewDetails = () => {
     
  
  <button className="btn-update" onClick={handleEdit}>
- edit
+ <MdModeEditOutline/>
+  Edit
 </button>
 
     

@@ -15,7 +15,7 @@ const Search = (props: Props) => {
 
   return (
     <div className="search-bar">
-      <input
+      {/* <input
         type="text"
         placeholder="Search..."
         value={query}
@@ -23,7 +23,7 @@ const Search = (props: Props) => {
       />
       <button className="add-button" onClick={handleAddUserClick}>
         Add Employee
-      </button>
+      </button> */}
     </div>
   );
 };

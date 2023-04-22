@@ -24,10 +24,10 @@ export const AddUser: React.FC<AddUserProps> = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     //working on this function
     e.preventDefault();
-    await jsConfetti.addConfetti({
-      emojis: ["🎉", "📈", "🚀"],
+    // await jsConfetti.addConfetti({
+    //   emojis: ["🎉", "📈", "🚀"],
       
-    })
+    // })
 
     const employee: User = {
       name: name,
@@ -114,6 +114,7 @@ export const AddUser: React.FC<AddUserProps> = () => {
           </form>
         </div>
       </div>
+      
     </>
   );
 };

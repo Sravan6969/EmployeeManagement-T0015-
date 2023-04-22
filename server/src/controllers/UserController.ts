@@ -115,6 +115,42 @@ export const getSingleEmployee = async (req: Request, res: Response) => {
 
 //update single Employee Api
 
+// export const updateSingleEmployee = async (req: Request, res: Response) => {
+//   const { Id } = req.params;
+//   const { name, email, designation } = req.body;
+//   console.log(Id);
+
+//   const id = Number(Id);
+
+//   if (isNaN(id)) {
+//     res.status(400).json({
+//       success: false,
+//       message: "Invalid ID provided",
+//     });
+//     return;
+//   }
+
+//   const updateEmployee = {
+//     name: name,
+//     email: email,
+//     designation: designation,
+//   };
+
+//   const employee = await sp.web.lists
+//     .getByTitle("Employees")
+//     .items.getById(id)
+//     .update(updateEmployee);
+
+//   res.status(200).json({
+//     success: true,
+//     message: " Succesfully Updated  Employee Details",
+//     employee,
+//   });
+// };
+
+// console.log(Response);
+
+
 export const updateSingleEmployee = async (req: Request, res: Response) => {
   const { Id } = req.params;
   const { name, email, designation } = req.body;
@@ -150,14 +186,52 @@ export const updateSingleEmployee = async (req: Request, res: Response) => {
 
 console.log(Response)
 
-// let Id = Response.user.Id
-//     // console.log("logging Response", Response);
-//     const folderId = Response.user.Id;
-//     const newFolderName = `${folderId}`;
-//     const documentLibraryName = `EmployeeLibrary`;
-//     const documentLibrary = sp.web.lists.getByTitle(documentLibraryName);
-//     await documentLibrary.rootFolder.folders
-//       .addUsingPath(newFolderName)
-//       .then(() => {
-//         console.log(`Folder '${newFolderName}' created successfully.`);
-//       });
+
+
+// export const uploadDocument = async (req: Request, res: Response) => {
+//   const { profileId } = req.params;
+//   let file = (req?.file as any)?.file;
+
+//   console.log("imagetype", file);
+
+//   const id = Number(profileId);
+
+//   if (!file) {
+//     console.error("No file selected");
+//     return res.status(400).json({
+//       success: false,
+//       message: "No file selected",
+//     });
+//   }
+
+//   const documentLibraryName = `EmployeeLibrary/${id}`;
+//   const fileNamePath = file.name;
+
+//   let result: any;
+//   if (file?.size <= 10485760) {
+//     // small upload
+//     console.log("Starting small file upload");
+//     result = await sp.web
+//       .getFolderByServerRelativePath(documentLibraryName)
+//       .files.addUsingPath(fileNamePath, file.data, { Overwrite: true });
+//   } else {
+//     // large upload
+//     console.log("Starting large file upload");
+//     result = await sp.web
+//       .getFolderByServerRelativePath(documentLibraryName)
+//       .files.addChunked(
+//         fileNamePath,
+//         file,
+//         () => {
+//           console.log(`Upload progress: `);
+//         },
+//         true
+//       );
+//   }
+
+//   res.status(200).json({
+//     success: true,
+//     message: "Document Uploaded succesfullly",
+//   });
+// };
+

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { IEmployee } from "../types";
-import "../styles/Card.css";
+import "../styles/Card.scss";
 
 import { useNavigate } from "react-router-dom";
 
@@ -45,9 +45,20 @@ const Card = ({ employee }: Props) => {
         <p>{designation}</p>
       </div>
       <div className="actions">
-        <button className="edit" onClick={handleView}>
+        {/* <button className="edit" onClick={handleView}>
           View
-        </button>
+        </button> */}
+        <div id="container">
+  <button className="learn-more">
+    <span className="circle" aria-hidden="true">
+      <span className="icon arrow"></span>
+    </span>
+    <span className="button-text" onClick={handleView}>Learn More</span>
+  </button>
+</div>
+
+
+
       </div>
     </div>
   );
