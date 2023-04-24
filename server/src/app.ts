@@ -11,9 +11,12 @@ import { SPFetchClient } from "@pnp/nodejs-commonjs";
 import UserRouter from "./routes/UserRouter";
 
 import cors from "cors";
+import multer from "multer";
 
 import morgan from "morgan";
 import bodyParser from "body-parser";
+
+
 
 const app: Application = express();
 
@@ -42,27 +45,10 @@ SpfxConnection();
 
 app.use("/get", UserRouter);
 
-// app.use("/get/:id", UserRouter);
 
-// const getAllItems = async () => {
-//   const response = await sp.web.lists.getByTitle("empployee").items.getAll();
 
-//   console.log(response);
-// };
 
-// getAllItems();
 
-// // app.get('/',(req:Request,res:Response)=>{
-
-// // res.send('helloo')
-
-// // })
-
-// // app.get('/test',(req,res)=>{
-
-// // res.send('helloo test')
-
-// // })
 
 app.listen(port, () => {
   console.log(`connected successfully on port ${port}`);

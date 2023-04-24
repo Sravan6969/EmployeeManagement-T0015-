@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import { AddUser } from './components/AddUser';
 import Documents from './components/Documents';
 import ViewDetails from './components/ViewDetails';
-import Footer from './components/Footer';
+
 
 
 
@@ -15,6 +15,8 @@ function App() {
   return (
     <>
       <Nav />
+      
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add-user" element={<AddUser />} />
@@ -22,7 +24,11 @@ function App() {
         <Route path="/view-details/:id" element={<ViewDetails/>} />
         
       </Routes>
-      <Footer/>
+      
+      
+      
+  
+
     </>
   );
 }

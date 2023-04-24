@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { IEmployee } from "../types";
-import "../styles/Card.scss";
+import "../styles/Card.scss"
 
 import { useNavigate } from "react-router-dom";
 
@@ -53,7 +53,7 @@ const Card = ({ employee }: Props) => {
     <span className="circle" aria-hidden="true">
       <span className="icon arrow"></span>
     </span>
-    <span className="button-text" onClick={handleView}>Learn More</span>
+    <span className="button-text" onClick={handleView}>View More</span>
   </button>
 </div>
 

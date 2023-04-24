@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/ViewDetails.css";
-import { MdModeEditOutline } from 'react-icons/md';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import { IEmployee } from "../types";
 
@@ -39,6 +40,7 @@ const ViewDetails = () => {
       console.log(id);
       await axios.delete(`http://localhost:5000/get/deleteEmployees/${id}`);
       navigate("/");
+      
     } catch (error) {
       console.log("delete clicked");
       console.error("Error deleting employee:", error);
@@ -84,33 +86,35 @@ const ViewDetails = () => {
     </div>
   </div>
   {isEditing ? (
-    <div className="flex flex-col space-y-4">
-      <input
-        type="text"
-        id="name"
-        value={name || ""}
-        onChange={(e) => setName(e.target.value)}
-        className="name-text"
-        placeholder={user?.name}
-      />
+    <div className="flex">
+      <div className="form-container">
+  <input
+    type="text"
+    id="name"
+    value={name || ""}
+    onChange={(e) => setName(e.target.value)}
+    className="form-input"
+    placeholder={user?.name}
+  />
 
-      <input
-        type="text"
-        id="emailInput"
-        value={email || ""}
-        onChange={(e) => setEmail(e.target.value)}
-        className="email-text"
-        placeholder={user?.email}
-      />
+  <input
+    type="text"
+    id="emailInput"
+    value={email || ""}
+    onChange={(e) => setEmail(e.target.value)}
+    className="form-input"
+    placeholder={user?.email}
+  />
 
-      <input
-        type="text"
-        id="emailInput"
-        value={designation || ""}
-        onChange={(e) => setDesignation(e.target.value)}
-        className="designation-text"
-        placeholder={user?.designation}
-      />
+  <input
+    type="text"
+    id="designation"
+    value={designation || ""}
+    onChange={(e) => setDesignation(e.target.value)}
+    className="form-input"
+    placeholder={user?.designation}
+  />
+</div>
 
 <button className="btn-update" onClick={handleUpdate}>
      Update
@@ -129,12 +133,13 @@ const ViewDetails = () => {
       </div>
       <button className="btn-delete" onClick={handleDelete}>
         Delete
+        <ToastContainer />
       </button>
     
     
  
  <button className="btn-update" onClick={handleEdit}>
- <MdModeEditOutline/>
+ 
   Edit
 </button>
 

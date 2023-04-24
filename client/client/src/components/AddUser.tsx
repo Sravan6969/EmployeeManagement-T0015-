@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddUser.css";
 import axios from "axios";
-import JSConfetti from 'js-confetti'
-const jsConfetti = new JSConfetti()
+import { BsArrowLeftCircleFill } from "react-icons/bs";
 
 interface AddUserProps {}
 
@@ -13,46 +12,49 @@ interface User {
   designation: string;
 }
 
-export const AddUser: React.FC<AddUserProps> = () => {
+let addedusers: any = {};
+
+export let AddUser: React.FC<AddUserProps> = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [designation, setDesignation] = useState<string>("");
   const [users, setUserList] = useState<User[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    //working on this function
     e.preventDefault();
-    // await jsConfetti.addConfetti({
-    //   emojis: ["🎉", "📈", "🚀"],
-      
     // })
 
     const employee: User = {
       name: name,
       email: email,
       designation: designation,
-
-      
     };
     console.log("New user: ", employee);
-    
 
     try {
       const response = await axios.post<User>(
         "http://localhost:5000/get/addemployee",
         employee
-        
       );
       navigate("/");
       console.log("Response: ", response.data);
-      
     } catch (error) {
-      
       console.error(error);
     }
   };
+
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  
 
   const handleBackClick = () => {
     console.log("Back button clicked");
@@ -66,55 +68,57 @@ export const AddUser: React.FC<AddUserProps> = () => {
 
   return (
     <>
-      <button className="back-btn" onClick={handleBackClick}>
-        BACK
-      </button>
-      <button className="back-btn" onClick={handleDocClick}>
-        Documents
-      </button>
-
-      <div className="add-user">
-        <div className="add-image">
-          <div className="image"></div>
-          <h1 className="text-id"> {name} </h1>
-        </div>
-        <div className="add-details">
-          <form>
-            <div className="">
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="designation"
-                placeholder="Enter Designation"
-                value={designation}
-                onChange={(e) => setDesignation(e.target.value)}
-              />
-              <br />
-              <button className="add-btn" onClick={handleClick}>
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
+      <div>
+        <button className="back-btn" onClick={handleBackClick}>
+          <div className="Back text">
+            <BsArrowLeftCircleFill className="back" />
+          </div>
+        </button>
+        <button className="Doc-btn" onClick={handleDocClick}>
+          Documents
+        </button>
       </div>
-      
+
+      <div className="login-box">
+        <h2>ADD USER</h2>
+        <form>
+          <div className="user-box">
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <label>Name</label>
+          </div>
+          <div className="user-box">
+            <input
+              type="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label>Email</label>
+          </div>
+          <div className="user-box">
+            <input
+              type="text"
+              onChange={(e) => setDesignation(e.target.value)}
+              required
+            />
+            <label>Designation</label>
+          </div>
+
+          <h4 className="prf">Profile Picture</h4>
+          <input 
+            type="file"
+            onChange={handleFileInputChange}
+            style={{ display: "inline-block" }}
+          />
+
+          <button className="add-btn" onClick={handleClick}>
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 };
