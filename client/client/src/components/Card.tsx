@@ -40,14 +40,11 @@ const Card = ({ employee }: Props) => {
         alt=""
       />
       <div className="name">
-        <h2>{name}</h2>
+        <h2 className="name-text">{name}</h2>
         <h5>{email}</h5>
         <p>{designation}</p>
       </div>
       <div className="actions">
-        {/* <button className="edit" onClick={handleView}>
-          View
-        </button> */}
         <div id="container">
   <button className="learn-more">
     <span className="circle" aria-hidden="true">

@@ -1,3 +1,8 @@
+.name-text {
+  text-transform: uppercase;
+  text-size-adjust: 20px;
+  color: #00ed64;
+}
 .Cards {
   display: flex;
   flex-wrap: wrap;
@@ -55,25 +60,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-/* .edit{
-  background-color: #00ED64;
-  border-color: black;
-  border-width: 1px;
-  border-radius: 5px;
-  color: black;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease;
-}
-
-.edit:hover {
-  /* background-color: #0062cc; */
-/* transition: 0.5s ease-in;
-  transition: 0.5s ease-out;
-  border-radius: 20px;
-} */
-
 .delete {
   background-color: #dc3545;
   margin-left: 10px;
@@ -87,7 +73,7 @@ button {
 
 $bg: #f3f8fa;
 $white: #fff;
-$black: #00ED64;
+$black: #00ed64;
 
 @mixin transition(
   $property: all,

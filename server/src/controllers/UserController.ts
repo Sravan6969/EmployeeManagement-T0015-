@@ -163,89 +163,15 @@ const updateEmployee = async (req: Request, res: Response) => {
 
 console.log(Response);
 
-
-
-
-
-//image Upload controller
-
-// export const uploadImage = async (req: Request, res: Response) => {
-//   let image = (req.files as any)?.image;
-
-//   console.log("imagetype", image);
-
-//   let id: number = Number.parseInt(req.params.id);
-
-//   if (!image) {
-//     console.error("No file selected");
-//     console.log(req.files);
-//     return res.status(400).json({
-//       success: false,
-//       message: "No file selected",
-//     });
-//   }
-
-//   const documentLibraryName = `EmployeeLibrary/${id}`;
-//   const fileNamePath = `profilepic.png`;
-
-//   let result: any;
-//   if (image?.size <= 10485760) {
-//     // small upload
-//     console.log("Starting small file upload");
-//     result = await sp.web
-//       .getFolderByServerRelativePath(documentLibraryName)
-//       .files.addUsingPath(fileNamePath, image.data, { Overwrite: true });
-//   } else {
-//     // large upload
-//     console.log("Starting large file upload");
-//     result = await sp.web
-//       .getFolderByServerRelativePath(documentLibraryName)
-//       .files.addChunked(
-//         fileNamePath,
-//         image,
-//         () => {
-//           console.log(`Upload progress: `);
-//         },
-//         true
-//       );
-//   }
-
-//   console.log("Server relative URL:", result?.data?.ServerRelativeUrl);
-//   const url = `https://2mxff3.sharepoint.com${result?.data?.ServerRelativeUrl}`;
-
-//   const list = sp.web.lists.getByTitle("employees");
-
-//   try {
-//     await list.items.getById(id).update({
-//       image: url,
-//     });
-
-//     console.log("File upload successful");
-//     res.status(200).json({
-//       success: true,
-//       message: "Profile picture uploaded successfully",
-//     });
-//   } catch (error) {
-//     console.error("Error while updating employee item:", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Error while updating employee item",
-//     });
-//   }
-// };
-
-
-
-
 export const uploadImage = async (req: Request, res: Response) => {
   const id: number = Number.parseInt(req.params.id);
   const image = req.file;
 
-    const fileBuffer = fs.readFileSync(req.file?.path);
+  const fileBuffer = fs.readFileSync(req.file?.path);
   console.log(req.file, "image file");
-console.log(fileBuffer)
+  console.log(fileBuffer);
 
-  console.log(image)
+  console.log(image);
 
   if (!image) {
     console.error("No file selected");
@@ -304,12 +230,6 @@ console.log(fileBuffer)
     });
   }
 };
-
-
-
-
-
-
 
 export {
   AddEmployees,

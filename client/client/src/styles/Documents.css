@@ -1,5 +1,6 @@
 
   .buttons-container {
+    margin: 10px 0 0 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -8,6 +9,7 @@
   
   .upload-button,
   .download-button {
+    margin: 10px 0 0 10px;
     background-color: #007bff;
     color: #fff;
     border: none;

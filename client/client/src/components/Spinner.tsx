@@ -13,11 +13,14 @@ const Spinner = () => {
   let [color, setColor] = useState("");
 
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
-      {/* <ClimbingBoxLoader
-        color="rgba(28, 49, 122, 1)"
-        size={28}
-      /> */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
       <HashLoader color="#00ED64" />
     </div>
   );

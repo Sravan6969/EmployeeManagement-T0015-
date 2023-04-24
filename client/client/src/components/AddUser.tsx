@@ -22,10 +22,18 @@ export let AddUser: React.FC<AddUserProps> = () => {
   const [designation, setDesignation] = useState<string>("");
   const [users, setUserList] = useState<User[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [disabled, setDisabled] = useState(false);
+  const [clicks, setClicks] = useState(0);
+
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // })
+
+    setClicks(clicks + 1);
+    if (clicks >= 1) {
+      setDisabled(true);
+    }
 
     const employee: User = {
       name: name,
@@ -54,7 +62,29 @@ export let AddUser: React.FC<AddUserProps> = () => {
     }
   };
 
-  
+  const handleFileUpload = async () => {
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5000//upload/:id`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleBackClick = () => {
     console.log("Back button clicked");
@@ -107,14 +137,7 @@ export let AddUser: React.FC<AddUserProps> = () => {
             <label>Designation</label>
           </div>
 
-          <h4 className="prf">Profile Picture</h4>
-          <input 
-            type="file"
-            onChange={handleFileInputChange}
-            style={{ display: "inline-block" }}
-          />
-
-          <button className="add-btn" onClick={handleClick}>
+          <button className="add-btn" onClick={handleClick} disabled={disabled} >
             Submit
           </button>
         </form>
