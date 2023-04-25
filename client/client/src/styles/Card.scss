@@ -1,3 +1,6 @@
+.gender{
+  color: whitesmoke;
+}
 .name-text {
   text-transform: uppercase;
   text-size-adjust: 20px;
@@ -7,6 +10,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.image-default{
+  
+  object-fit: cover;
 }
 
 .image {

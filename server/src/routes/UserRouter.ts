@@ -8,7 +8,8 @@ import {
   deleteEmployees,
   getSingleEmployee,
   updateEmployee,
-  uploadImage
+  uploadImage,
+  uploadDocument
   
 } from "../controllers/UserController";
 
@@ -42,4 +43,5 @@ router.route("/uploadimage/:id").put(uploadImage);
 
 router.put("/upload/:id", upload.single("image"), uploadImage);
 
+router.put("/document/:id", upload.single("file"), uploadDocument);
 export default router;

@@ -8,16 +8,17 @@ import Documents from "./components/Documents";
 import ViewDetails from "./components/ViewDetails";
 import { ToastContainer } from "react-toastify";
 
+
 function App() {
   return (
     <>
-
       <Nav />
-    <ToastContainer/>
+      <ToastContainer />
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/add-user" element={<AddUser />} />
-        <Route path="/add-doc" element={<Documents />} />
+        <Route path="/add-doc/:id" element={<Documents />} />
         <Route path="/view-details/:id" element={<ViewDetails />} />
       </Routes>
     </>

@@ -47,11 +47,13 @@ const AddEmployees = async (req: Request, res: Response) => {
       name: req.body.name,
       email: req.body.email,
       designation: req.body.designation,
+      gender: req.body.gender
     };
     const Response = await sp.web.lists.getByTitle("Employees").items.add({
       name: newUser.name,
       email: newUser.email,
       designation: newUser.designation,
+      gender: newUser.gender
     });
 
     const folderId = Response.data.Id;
@@ -163,6 +165,8 @@ const updateEmployee = async (req: Request, res: Response) => {
 
 console.log(Response);
 
+//upload Image API
+
 export const uploadImage = async (req: Request, res: Response) => {
   const id: number = Number.parseInt(req.params.id);
   const image = req.file;
@@ -230,6 +234,64 @@ export const uploadImage = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+//upload Document API
+
+
+export const uploadDocument = async (req: Request, res: Response) => {
+  try {
+    const id: number = Number.parseInt(req.params.id);
+    const file = req.file;
+
+    if (!file) {
+      console.error("No file selected");
+      return res.status(400).json({
+        success: false,
+        message: "No file selected",
+      });
+    }
+
+    const documentLibraryName = `EmployeeLibrary/${id}`;
+    const fileNamePath = `document.pdf`;
+
+    let result: any;
+    if (file.size <= 10485760) {
+      // small upload
+      console.log("Starting small file upload");
+      result = await sp.web
+        .getFolderByServerRelativePath(documentLibraryName)
+        .files.addUsingPath(fileNamePath, file.buffer, { Overwrite: true });
+    } else {
+      // large upload
+      console.log("Starting large file upload");
+      result = await sp.web
+        .getFolderByServerRelativePath(documentLibraryName)
+        .files.addChunked(
+          fileNamePath,
+          new Blob([file.buffer]),
+          () => {
+            console.log(`Upload progress: `);
+          },
+          true
+        );
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "File uploaded successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Error uploading file",
+    });
+  }
+};
+
+
+
 
 export {
   AddEmployees,

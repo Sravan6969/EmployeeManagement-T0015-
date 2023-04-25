@@ -1,5 +1,5 @@
 import { useState, CSSProperties } from "react";
-import { ClimbingBoxLoader, PacmanLoader, HashLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const override: CSSProperties = {

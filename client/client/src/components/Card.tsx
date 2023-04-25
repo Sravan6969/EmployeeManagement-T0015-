@@ -10,23 +10,12 @@ interface Props {
 }
 
 const Card = ({ employee }: Props) => {
-  const { name, designation, email, Id } = employee;
+  const { name, designation, email, Id ,image , gender} = employee;
   const navigate = useNavigate();
 
   if (!employee) {
     return <> loding...</>;
   }
-
-  const handleDelete = async () => {
-    try {
-      console.log(Id);
-      await axios.delete(`http://localhost:5000/get/deleteEmployees/${Id}`);
-      window.location.reload();
-    } catch (error) {
-      console.log("delete clicked");
-      console.error("Error deleting employee:", error);
-    }
-  };
 
   const handleView = () => {
     navigate(`/view-details/${Id}`);
@@ -34,15 +23,26 @@ const Card = ({ employee }: Props) => {
 
   return (
     <div className="card">
-      <img
+      {/* <img
         className="image"
-        src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Customer-testimonial-page.jpg?width=893&height=600&name=Customer-testimonial-page.jpg"
+        src={image}
         alt=""
-      />
+      /> */}
+      {image ? (
+              <img src={`${image}`} alt="User Image" className="image" />
+            ) : (
+              <img  className="image-default"
+                src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=2000"
+                
+              
+                alt="" height="250px" width="250px"
+              />
+            )}
       <div className="name">
         <h2 className="name-text">{name}</h2>
         <h5>{email}</h5>
         <p>{designation}</p>
+        <h4 className="gender">{gender}</h4>
       </div>
       <div className="actions">
         <div id="container">

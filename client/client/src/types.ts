@@ -1,7 +1,9 @@
-export interface IEmployee{
-    Id?:string;
-    name: string;
-    email?: string;
-    designation?: string
-    
+export interface IEmployee {
+  Id?: string;
+  name: string;
+  email?: string;
+  designation?: string;
+  gender?: string;
+  image?: string;
+  dob?: string;
 }

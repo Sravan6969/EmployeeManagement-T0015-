@@ -55,6 +55,17 @@ img {
   cursor: pointer;
 }
 
+.btn-upload {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #fff;
+  padding-left: 10px;
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .btn-delete {
   background-color: #cc0000;
   margin-right: 10px;
