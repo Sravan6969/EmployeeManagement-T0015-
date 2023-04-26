@@ -1,37 +1,71 @@
+.document-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
 
-  .buttons-container {
-    margin: 10px 0 0 10px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .upload-button,
-  .download-button {
-    margin: 10px 0 0 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .upload-button:hover,
-  .download-button:hover {
-    background-color: #0062cc;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .buttons-container {
-      flex-direction: column;
-    }
-  
-    .upload-button,
-    .download-button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  }
-  
+.document-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-upload {
+  background-color: #00ed64; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-upload:hover {
+  background-color: #00ed64;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+li:hover {
+  background-color: #ddd;
+}
+
+.text-lg {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.fa-download {
+  font-size: 20px;
+}
+
+.fa-download:hover {
+  color: blue;
+}
+
+.add-doc{
+  color: #ccc;
+}

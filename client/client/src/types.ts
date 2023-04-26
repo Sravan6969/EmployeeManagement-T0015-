@@ -6,4 +6,5 @@ export interface IEmployee {
   gender?: string;
   image?: string;
   dob?: string;
+  country?:string;
 }

@@ -14,11 +14,44 @@ interface User {
   designation: string;
   gender:string;
   image: string;
+  file:string;
 }
 
+const [files, setFiles] = React.useState<Document[]>([]);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { id } = useParams<{ id: string }>();
+  // const handleDocumentUpload = async () => {
+  //   try {
+  //     if (!selectedFile) {
+  //       throw new Error("No file selected");
+  //     }
+  
+  //     const formData = new FormData();
+  //     formData.append("document", selectedFile);
+  
+  //     const response = await axios.put(
+  //       `http://localhost:5000/get/document/${id}`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  
+  //     console.log("Document uploaded successfully:", response.data);
+  //     toast.success("Document uploaded successfully", {
+  //       className: "toastify-success",
+  //     });
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.error("Error uploading document:", error);
+  //     toast.error("Error uploading document", {
+  //       className: "toastify-error",
+  //     });
+  //   }
+  // };
   const handleDocumentUpload = async () => {
     try {
       if (!selectedFile) {
@@ -26,7 +59,7 @@ interface User {
       }
   
       const formData = new FormData();
-      formData.append("document", selectedFile);
+      formData.append("file", selectedFile);
   
       const response = await axios.put(
         `http://localhost:5000/get/document/${id}`,
@@ -50,11 +83,14 @@ interface User {
       });
     }
   };
-  
+    
+
+
+
   return (
     <div className="document-container">
       <div className="document-image">
-      <label>Profile Picture</label>
+      <h1 className='add-doc'>ADD DOCUMENT</h1>
             <input
               type="file"
               onChange={(e) => {
@@ -68,13 +104,22 @@ interface User {
               Upload
             </button>
       </div>
-      <div className="buttons-container">
-        <button className="upload-button">Upload</button>
-        <button className="download-button">Download</button>
+   
+      <table>
+  <tr>
+    <th>File Name</th>
+    <th>Download</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+  </tr>
+</table>
 
-
-
-      </div>
     </div>
   );
 }

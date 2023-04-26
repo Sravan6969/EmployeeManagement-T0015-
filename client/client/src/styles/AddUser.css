@@ -234,3 +234,34 @@ input[type="file"] {
 .gender1{
   color: #fff;
 }
+
+
+
+.dob {
+  display: block;
+  font-weight: bold;
+  
+  margin-top: 20px;
+  color: #fff;
+}
+
+.input_field {
+  width: 100%;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: -20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  color-scheme: dark;
+}
+
+.input_field{
+  color-scheme: dark;
+  background-color: transparent;
+}
+
+.input_v{
+  color: black;
+}

@@ -13,26 +13,29 @@ interface User {
   email: string;
   designation: string;
   gender: string;
-  DOB: string;
+  dob: string;
 }
 
 let addedusers: any = {};
 
 export let AddUser: React.FC<AddUserProps> = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [designation, setDesignation] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
   const [users, setUserList] = useState<User[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [disabled, setDisabled] = useState(false);
   const [clicks, setClicks] = useState(0);
-
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -48,7 +51,7 @@ export let AddUser: React.FC<AddUserProps> = () => {
       email: email,
       designation: designation,
       gender: gender,
-      DOB:date
+      dob: date,
     };
     console.log("New user: ", employee);
 
@@ -56,12 +59,11 @@ export let AddUser: React.FC<AddUserProps> = () => {
       const response = await axios.post<User>(
         "http://localhost:5000/get/addemployee",
         employee
-        
       );
-      toast.success("User added successfully")
+      toast.success("User added successfully");
       navigate("/");
       console.log("Response: ", response.data);
-    } catch (error) {   
+    } catch (error) {
       console.error(error);
     }
   };
@@ -73,7 +75,6 @@ export let AddUser: React.FC<AddUserProps> = () => {
       setSelectedFile(event.target.files[0]);
     }
   };
-
 
   const handleBackClick = () => {
     console.log("Back button clicked");
@@ -87,7 +88,6 @@ export let AddUser: React.FC<AddUserProps> = () => {
 
   return (
     <>
-    
       <div>
         <button className="back-btn" onClick={handleBackClick}>
           <div className="Back text">
@@ -105,9 +105,7 @@ export let AddUser: React.FC<AddUserProps> = () => {
           <div className="user-box">
             <input
               type="text"
-              
               onChange={(e) => setName(e.target.value)}
-              
               required
             />
             <label>Name</label>
@@ -129,33 +127,81 @@ export let AddUser: React.FC<AddUserProps> = () => {
             <label>Designation</label>
           </div>
           <label className="gender1">Gender:</label>
-            <div className="flex space-x-4">
-              <label className="gender">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Male"
-                  checked={gender === "Male"}
-                  onChange={(e) => setGender(e.target.value)}
-                  required
-                  className="gender"
-                />
-                <span className="gender">Male</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  required
-                  checked={gender === "Female"}
-                  onChange={(e) => setGender(e.target.value)}
-                  className="form-radio border-gray-300 text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="gender">Female</span>
-              </label>
-              </div>
-          <button className="add-btn" onClick={handleClick} disabled={disabled} >
+          <div className="flex space-x-4">
+            <label className="gender">
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+                checked={gender === "Male"}
+                onChange={(e) => setGender(e.target.value)}
+                required
+                className="gender"
+              />
+              <span className="gender">Male</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+                required
+                checked={gender === "Female"}
+                onChange={(e) => setGender(e.target.value)}
+                className="form-radio border-gray-300 text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <span className="gender">Female</span> 
+              <div className="input_wrap"></div>
+            </label>
+            <label className="dob">
+              Date of Birth:
+              {/* {date ? new Date(date).toLocaleDateString() : ""} */}
+            </label>
+             
+            <input
+              className="input_field"
+              placeholder="date of birth"
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <label>Country</label>               {" "}
+            <select
+              className="input_field"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              <option className="input_v" value="">
+                -- Select Country --
+              </option>
+               
+              <option className="input_v" value="France">
+                India
+              </option>
+                           
+              <option className="input_v" value="USA">
+                USA
+              </option>
+               
+              <option className="input_v" value="Canada">
+                Canada
+              </option>
+                             
+              <option className="input_v" value="Mexico">
+                Mexico
+              </option>
+                     
+              <option className="input_v" value="Germany">
+                Germany
+              </option>
+                     
+              <option className="input_v" value="France">
+                France
+              </option>
+               
+            </select>
+          </div>
+          <button className="add-btn" onClick={handleClick} disabled={disabled}>
             Submit
           </button>
         </form>

@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 import Swal from "sweetalert2";
+import { Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/react";
+import MyTabs from "./Tab";
+
 // import { IEmployee } from "../types";
 
 interface User {
@@ -13,8 +16,11 @@ interface User {
   name: string;
   email: string;
   designation: string;
-  gender:string;
+  gender: string;
   image: string;
+  dob:string;
+  country:string;
+
 }
 
 const ViewDetails = () => {
@@ -25,6 +31,8 @@ const ViewDetails = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [gender, setGender] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [dob, setDob] = useState<string>("");
   const [designation, setDesignation] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -154,14 +162,15 @@ const ViewDetails = () => {
 
   return (
     <>
+    {/* <MyTabs /> */}
       <button className="back-btn" onClick={handleBackClick}>
-          <div className="Back text">
-            <BsArrowLeftCircleFill className="back" />
-          </div>
-        </button>
-        <button className="Doc-btn" onClick={handleDocClick}>
-          Documents
-        </button>
+        <div className="Back text">
+          <BsArrowLeftCircleFill className="back" />
+        </div>
+      </button>
+      <button className="Doc-btn" onClick={handleDocClick}>
+        Documents
+      </button>
       <div className="container2">
         <div className="left">
           <div className="imagecontainer">
@@ -170,13 +179,12 @@ const ViewDetails = () => {
               <img src={`${user?.image}`} alt="User Image" className="imge" />
             ) : (
               <img
-                src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=2000"
-                
-              
-                alt="" height="250px" width="250px"
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                alt=""
+                height="250px"
+                width="250px"
               />
             )}
-            
           </div>
         </div>
         {isEditing ? (
@@ -243,6 +251,12 @@ const ViewDetails = () => {
             </div>
             <div className="designation">
               Gender: <span>{user?.gender}</span>
+            </div>
+            <div className="designation">
+              Date of Birth: <span>{user?.dob}</span>
+            </div>
+            <div className="designation">
+              Country: <span>{user?.country}</span>
             </div>
             {/* <div className="designation">
               gender: <span>{user?.gender}</span>

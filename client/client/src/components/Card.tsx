@@ -32,7 +32,7 @@ const Card = ({ employee }: Props) => {
               <img src={`${image}`} alt="User Image" className="image" />
             ) : (
               <img  className="image-default"
-                src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=2000"
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                 
               
                 alt="" height="250px" width="250px"

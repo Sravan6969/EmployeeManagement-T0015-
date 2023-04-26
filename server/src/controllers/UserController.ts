@@ -47,13 +47,17 @@ const AddEmployees = async (req: Request, res: Response) => {
       name: req.body.name,
       email: req.body.email,
       designation: req.body.designation,
-      gender: req.body.gender
+      gender: req.body.gender,
+      dob: req.body.dob,
+      country: req.body.country,
     };
     const Response = await sp.web.lists.getByTitle("Employees").items.add({
       name: newUser.name,
       email: newUser.email,
       designation: newUser.designation,
-      gender: newUser.gender
+      gender: newUser.gender,
+      dob: newUser.dob,
+      country: newUser.country,
     });
 
     const folderId = Response.data.Id;
@@ -132,7 +136,7 @@ const getSingleEmployee = async (req: Request, res: Response) => {
 
 const updateEmployee = async (req: Request, res: Response) => {
   const { Id } = req.params;
-  const { name, email, designation } = req.body;
+  const { name, email, designation, gender } = req.body;
   console.log(Id);
 
   const id = Number(Id);
@@ -149,6 +153,7 @@ const updateEmployee = async (req: Request, res: Response) => {
     name: name,
     email: email,
     designation: designation,
+    gender: gender,
   };
 
   const employee = await sp.web.lists
@@ -235,11 +240,9 @@ export const uploadImage = async (req: Request, res: Response) => {
   }
 };
 
-
 //upload Document API
 
-
-export const uploadDocument = async (req: Request, res: Response) => {
+const uploadDocument = async (req: Request, res: Response) => {
   try {
     const id: number = Number.parseInt(req.params.id);
     const file = req.file;
@@ -290,8 +293,34 @@ export const uploadDocument = async (req: Request, res: Response) => {
   }
 };
 
+const getFilesInDirectory = async (req: Request, res: Response) => {
+  const { Id } = req.params;
+  const id = Id;
+  console.log("files list")
+  const documentLibraryName = `EmployeeLibrary/${id}`;
 
-
+  try {
+    console.log('first')
+    const folder = await sp.web.getFolderByServerRelativePath(documentLibraryName).files.get();
+    console.log(folder)
+    const files = folder.map((file: any) => {
+      return file.Name;
+    });
+    console.log(files)
+    res.status(200).json({
+      success: true,
+      message: 'Retrieved files in directory',
+      files
+    });
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: `Error retrieving files in directory: ${err.message}`,
+      error: err.stack
+    });
+  }
+};
 
 export {
   AddEmployees,
@@ -300,4 +329,6 @@ export {
   getSingleEmployee,
   deleteEmployees,
   updateEmployee,
+  uploadDocument,
+  getFilesInDirectory,
 };
