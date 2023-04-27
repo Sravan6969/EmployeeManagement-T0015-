@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 import Swal from "sweetalert2";
-import { Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/react";
-import MyTabs from "./Tab";
+import Tab from "./Tab";
 
 // import { IEmployee } from "../types";
 
@@ -18,9 +17,8 @@ interface User {
   designation: string;
   gender: string;
   image: string;
-  dob:string;
-  country:string;
-
+  dob: string;
+  country: string;
 }
 
 const ViewDetails = () => {
@@ -162,15 +160,19 @@ const ViewDetails = () => {
 
   return (
     <>
-    {/* <MyTabs /> */}
       <button className="back-btn" onClick={handleBackClick}>
         <div className="Back text">
           <BsArrowLeftCircleFill className="back" />
         </div>
       </button>
+
       <button className="Doc-btn" onClick={handleDocClick}>
         Documents
       </button>
+
+      <div className="tab">
+        
+      </div>
       <div className="container2">
         <div className="left">
           <div className="imagecontainer">

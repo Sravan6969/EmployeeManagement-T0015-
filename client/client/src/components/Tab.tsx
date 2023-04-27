@@ -1,38 +1,18 @@
-import { Tab, TabList, TabPanel, TabPanels } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
-function MyTabs(): JSX.Element {
-  const [value, setValue] = useState<number>(0);
-
-  // const handleChange = (
-  //   value: any,
-  //   event: React.FormEvent<HTMLDivElement>,
-  //   tab: Tab
-  // ) => {
-  //   setValue(tab.props.value);
-  // };
-
-  return (
-    <Tab>
+export default () => (
+  <Tabs>
     <TabList>
-      <Tab>One</Tab>
-      <Tab>Two</Tab>
-      <Tab>Three</Tab>
+      <Tab>Title 1</Tab>
+      <Tab>Title 2</Tab>
     </TabList>
-  
-    <TabPanels>
-      <TabPanel>
-        <p>one!</p>
-      </TabPanel>
-      <TabPanel>
-        <p>two!</p>
-      </TabPanel>
-      <TabPanel>
-        <p>three!</p>
-      </TabPanel>
-    </TabPanels>
-    </Tab>
-  );
-}
 
-export default MyTabs;
+    <TabPanel>
+      <h2>Any content 1</h2>
+    </TabPanel>
+    <TabPanel>
+      <h2>Any content 2</h2>
+    </TabPanel>
+  </Tabs>
+);

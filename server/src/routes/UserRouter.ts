@@ -10,7 +10,8 @@ import {
   updateEmployee,
   uploadImage,
   uploadDocument,
-  getFilesInDirectory
+  getFilesInDirectory,
+  downloadFile
   
 } from "../controllers/UserController";
 
@@ -46,5 +47,8 @@ router.put("/upload/:id", upload.single("image"), uploadImage);
 
 router.put("/document/:id", upload.single("file"), uploadDocument);
 
-router.route("/documentView/:id").get(getFilesInDirectory);
+router.route("/documentView/:Id").get(getFilesInDirectory);
+
+router.route("/documents/:id/download").get(downloadFile);
+
 export default router;

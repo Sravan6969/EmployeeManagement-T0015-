@@ -155,7 +155,7 @@ export let AddUser: React.FC<AddUserProps> = () => {
             </label>
             <label className="dob">
               Date of Birth:
-              {/* {date ? new Date(date).toLocaleDateString() : ""} */}
+              {date ? new Date(date).toLocaleDateString() : ""}
             </label>
              
             <input
@@ -165,7 +165,7 @@ export let AddUser: React.FC<AddUserProps> = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
-            <label>Country</label>               {" "}
+            <label>Country</label> 
             <select
               className="input_field"
               value={country}

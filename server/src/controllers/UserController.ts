@@ -6,6 +6,8 @@ const fs = require("fs");
 
 import { SPFetchClient } from "@pnp/nodejs-commonjs";
 
+import getContentType from "../utils/getContentType";
+
 // get all employees details
 
 const getAllEmployees = async (req: Request, res: Response) => {
@@ -294,34 +296,43 @@ const uploadDocument = async (req: Request, res: Response) => {
 };
 
 const getFilesInDirectory = async (req: Request, res: Response) => {
+  console.log(req.params);
+
   const { Id } = req.params;
-  const id = Id;
-  console.log("files list")
-  const documentLibraryName = `EmployeeLibrary/${id}`;
+  const id = parseInt(Id);
+
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
 
   try {
-    console.log('first')
-    const folder = await sp.web.getFolderByServerRelativePath(documentLibraryName).files.get();
-    console.log(folder)
-    const files = folder.map((file: any) => {
-      return file.Name;
-    });
-    console.log(files)
-    res.status(200).json({
-      success: true,
-      message: 'Retrieved files in directory',
-      files
-    });
-  } catch (err: any) {
-    console.error(err);
-    res.status(500).json({
-      success: false,
-      message: `Error retrieving files in directory: ${err.message}`,
-      error: err.stack
-    });
+    const documentLibraryName = "EmployeeLibrary";
+    const folderUrl = `EmployeeLibrary/${id}`;
+    const documentLibrary = await sp.web
+      .getFolderByServerRelativeUrl(folderUrl)
+      .files.select("Name", "ServerRelativeUrl")
+      .get();
+    console.log(documentLibrary);
+
+    return res.json(documentLibrary);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Something went wrong" });
   }
 };
 
+const downloadFile = async (req: Request, res: Response) => {
+  const serverRelativePath = req.query.serverRelativePath as string;
+  const file = sp.web.getFileByServerRelativePath(serverRelativePath);
+  const buffer: ArrayBuffer = await file.getBuffer();
+
+  const fileName = serverRelativePath.split("/").pop() || ""; // get the file name with extension
+  const contentType = getContentType(fileName); // get the content type based on file extension
+
+  res.setHeader("Content-disposition", `attachment; filename=${fileName}`);
+  res.setHeader("Content-type", contentType);
+  res.status(200).send(Buffer.from(buffer));
+};
 export {
   AddEmployees,
   getAllEmployees,
@@ -331,4 +342,5 @@ export {
   updateEmployee,
   uploadDocument,
   getFilesInDirectory,
+  downloadFile,
 };
